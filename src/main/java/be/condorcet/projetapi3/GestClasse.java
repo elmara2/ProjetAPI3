@@ -39,10 +39,8 @@ public class GestClasse {
         cl.setSpecialite(specialite);
         cl.setNbreeleves(nbreeleves);
         try {
-            classeRepository.save(cl);//mise à jour du client avec son id
-            //par l'environnement
+            classeRepository.save(cl);
             System.out.println(cl);
-            Collection<Classe> lcl= classeRepository.findAll();
             model.put("nouvclasse",cl);
         } catch (Exception e) {
             System.out.println("----------erreur lors de la création-------" + e);
@@ -65,11 +63,43 @@ public class GestClasse {
         return "affClasse";
     }
 
+    @RequestMapping("/rechClass")
+    public String rechClass(@RequestParam int idclasse, Map<String, Object> model){
+        System.out.println("recherche de la classe "+idclasse);
+        try{
+            model.put("macl",classeRepository.findClasseByIdclasseLike(idclasse));
+        }
+        catch (Exception e){
+            System.out.println("----------erreur lors de la recherche ----- " + e);
+            model.put("error",e.getMessage());
+            return "error";
+        }
+        return "editClasse";
+    }
     @RequestMapping("/update")
-    public String update(@RequestParam int idclasse,@RequestParam String sigle,@RequestParam int annee,
-                         @RequestParam String specialite,@RequestParam int nreeleves,
+    public String update(@RequestParam int idclasse,@RequestParam int annee,
+                         @RequestParam String specialite,@RequestParam int nbreeleves,
                          Map<String ,Object> model){
-        return "";
+
+        System.out.println("Modification de la classe");
+        try {
+
+            Optional<Classe> ocl = classeRepository.findById(idclasse);
+            ocl.ifPresent((cl)->{
+                cl=ocl.get();
+                cl.setNbreeleves(nbreeleves);
+                cl.setSpecialite(specialite);
+                cl.setAnnee(annee);
+                classeRepository.save(cl);
+            });
+
+            model.put("macl",classeRepository.findClasseByIdclasseLike(idclasse));
+        } catch (Exception e) {
+            System.out.println("----------erreur lors de la modification-------" + e);
+            model.put("error",e.getMessage());
+            return "error";
+        }
+        return "affClasse";
     }
 
     @RequestMapping("/delete")
@@ -79,7 +109,7 @@ public class GestClasse {
         try {
             classeRepository.deleteById(idclasse);
         } catch (Exception e) {
-            System.out.println("----------erreur lors de la modification-------" + e);
+            System.out.println("----------erreur lors de la suppression-------" + e);
             model.put("error",e.getMessage());
             return "error";
         }

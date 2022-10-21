@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ClasseRepository extends JpaRepository<Classe,Integer> {
     public Classe findClasseByIdclasseLike(int idclasse);
-    public void deleteClasseBySigleLike(String sigle);
 }

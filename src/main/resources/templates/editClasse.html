@@ -5,6 +5,30 @@
     <title>Editeur de classe</title>
 </head>
 <body>
-
+<h1>Modification de la classe</h1>
+<table border="1">
+    <th>id de la classe</th>
+    <th>sigle</th>
+    <th>année</th>
+    <th>specialite</th>
+    <th>nombre d'élèves</th>
+    <tr>
+        <td th:text="${macl.idclasse}"/>
+        <td th:text="${macl.sigle}"/>
+        <td th:text="${macl.annee}"/>
+        <td th:text="${macl.specialite}"/>
+        <td th:text="${macl.nbreeleves}"/>
+    </tr>
+</table>
+<br><br>
+<form action="../classes/update?idclasse='${macl.idclasse}'" method="get">
+    id de la classe : <input type="number" name="idclasse" th:value="${macl.idclasse}" readonly/><br>
+    sigle de la classe : <input type="text" name="sigle" th:value="${macl.sigle}" readonly/><br>
+    nouvelle annee : <input type="number" name="annee"><br>
+    nouvelle specialite : <input type="text" name="specialite"><br>
+    nouveau nombre d'élèves : <input type="number" name="nbreeleves"> <br>
+    <input type="submit" name="valider" value="valider">
+</form>
+   <p><a href="/">retour</a> </p>
 </body>
 </html>
