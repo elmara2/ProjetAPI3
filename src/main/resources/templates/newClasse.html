@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Nouvelle Classe</title>
 </head>
 <body>
-
+<h1>La nouvelle classe à étè ajouté a la base de données</h1>
+    <table border="1">
+        <th>id</th>
+        <th>sigle</th>
+        <th>annee</th>
+        <th>specialite</th>
+        <th>nombre d'élèves</th>
+        <tr>
+            <td th:text="${nouvclasse.idclasse}"/>
+            <td th:text="${nouvclasse.sigle}"/>
+            <td th:text="${nouvclasse.annee}"/>
+            <td th:text="${nouvclasse.specialite}"/>
+            <td th:text="${nouvclasse.nbreeleves}"/>
+        </tr>
+    </table>
+<p><a href="/">retour</a> </p>
 </body>
 </html>

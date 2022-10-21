@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>liste des classes</title>
 </head>
 <body>
-
+<p>Liste des classes disponibles</p>
+<table>
+    <th>id de la classe</th>
+    <th>sigle</th>
+    <th>année</th>
+    <th>specialite</th>
+    <th>nombre d'élèves</th>
+    <tr th:each = "uneClasse : ${mesClasses}">
+        <td th:text="${uneClasse.idclasse}"/>
+        <td th:text="${uneClasse.sigle}"/>
+        <td th:text="${uneClasse.annee}"/>
+        <td th:text="${uneClasse.specialite}"/>
+        <td th:text="${uneClasse.nbreeleves}"/>
+    </tr>
+</table>
+<p><a href="/">retour</a> </p>
 </body>
 </html>

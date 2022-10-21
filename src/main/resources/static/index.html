@@ -2,9 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ACCUEIL</title>
 </head>
 <body>
+    <p>Bienvenue</p>
+    <p><a href="classes/tous">Voir la liste des classes</a></p>
+    <h1>nouvelle classe</h1>
+    <form action="classes/create" method="get">
+        Sigle : <input type="text" name="sigle"> <br>
+        Annee : <input type="number" name="annee"><br>
+        Specialite : <input type="text" name="specialite"><br>
+        Nombre d'élèves : <input type="number" name="nbreeleves"> <br>
+        <input type="submit" name="valider" value="valider">
+    </form>
+    <h1>Recherche d'une classe</h1>
+    id de la classe a rechercher :
+    <form action="classes/read" method="get">
+        <input type="number" name="idclasse">
+        <input type="submit" value="valider" name="valider">
+    </form>
 
+    <h1>Modification d'une classe</h1>
+    id de la classe a modifier :
+        <form action="classes/update" method="get">
+            <input type="number" name="idclasse">
+            <input type="submit" value="valider" name="valider">
+        </form>
+    <h1>Suppression d'une classe</h1>
+   id de la classe a supprimer :
+        <form action="classes/delete">
+        <input type="number" name="idclasse">
+        <input type="submit" value="valider" name="valider">
+    </form>
 </body>
 </html>

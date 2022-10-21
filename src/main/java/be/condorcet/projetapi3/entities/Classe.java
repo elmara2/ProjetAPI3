@@ -11,11 +11,11 @@ import javax.persistence.*;
 public class Classe {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "classe_generator")
-    @SequenceGenerator(name = "classe_generator", sequenceName = "MASEQUECNE",allocationSize = 1)
+    @SequenceGenerator(name = "classe_generator", sequenceName = "MASEQUENCE",allocationSize = 1)
     private Integer idclasse;
     @NonNull
     private String sigle;
     private Integer annee;
     private String specialite;
-    private Integer nbrEleves;
+    private Integer nbreeleves;
 }
