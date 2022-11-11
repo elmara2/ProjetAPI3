@@ -9,19 +9,18 @@ import java.util.List;
 @Data @NoArgsConstructor @AllArgsConstructor @RequiredArgsConstructor
 @ToString
 @Entity
-@Table(name = "CLASSE", schema = "ORA10" , catalog = "orcl")
-public class Classe {
+@Table(name = "COURS", schema = "ORA10" , catalog = "orcl")
+public class Cours {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "classe_generator")
     @SequenceGenerator(name = "classe_generator", sequenceName = "MASEQUENCE",allocationSize = 1)
-    private Integer idclasse;
+    private Integer idcours;
     @NonNull
-    private String sigle;
-    private Integer annee;
-    private String specialite;
-    private Integer nbreeleves;
+    private String code;
+    private String intitule;
     @JsonIgnore
-    @OneToMany(mappedBy = "classe")
+    @OneToMany(mappedBy = "cours")
     @ToString.Exclude
     private List<Infos> listInfos;
+
 }

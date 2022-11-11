@@ -2,9 +2,12 @@ package be.condorcet.projetapi3.repositories;
 
 import be.condorcet.projetapi3.entities.Classe;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ClasseRepository extends JpaRepository<Classe,Integer> {
-    public Classe findClasseByIdclasseLike(int idclasse);
+    public Classe findClasseByIdclasseLike(Integer id);
+    public List<Classe> findClassesBySpecialiteLike(String specialite);
 }
