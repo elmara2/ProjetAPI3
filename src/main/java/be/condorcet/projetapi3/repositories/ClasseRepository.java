@@ -10,4 +10,5 @@ import java.util.List;
 public interface ClasseRepository extends JpaRepository<Classe,Integer> {
     public Classe findClasseByIdclasseLike(Integer id);
     public List<Classe> findClassesBySpecialiteLike(String specialite);
+    public Classe findClasseBySigleLike(String sigle);
 }

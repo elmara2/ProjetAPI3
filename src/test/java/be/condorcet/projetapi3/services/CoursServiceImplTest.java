@@ -100,4 +100,15 @@ class CoursServiceImplTest {
         }catch (Exception e){ fail("erreur de recherche de tous les cours "+e);
         }
     }
+
+    @Test
+    void rechCours(){
+        List<Cours> lcrs = coursServiceImpl.read("IntituleTest");
+        boolean trouve=false;
+        for(Cours c : lcrs){
+            if(c.getIntitule().equals("IntituleTest")) trouve=true;
+            else fail("un record ne correspond pas , intitule = "+c.getIntitule());
+        }
+        assertTrue(trouve,"record intitule trouvé dans la liste");
+    }
 }

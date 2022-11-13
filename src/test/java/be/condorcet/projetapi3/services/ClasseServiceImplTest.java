@@ -18,7 +18,9 @@ class ClasseServiceImplTest {
 
     @Autowired
     private ClasseServiceImpl classeServiceImpl;
+
     Classe cl;
+
     @BeforeEach
     void setUp() {
         try{
@@ -46,9 +48,9 @@ class ClasseServiceImplTest {
     void create() {
         assertNotEquals(0,cl.getIdclasse(),"id classe non incrémenté");
         assertEquals("SigleTest",cl.getSigle(),"sigle de la classe non enregistré : "+cl.getSigle()+ " au lieu de SigleTest");
-        assertEquals("AnneeTest",cl.getAnnee(),"annee de la classe non enregistré : "+cl.getAnnee()+" au lieu de AnneeTest");
+        assertEquals(2,cl.getAnnee(),"annee de la classe non enregistré : "+cl.getAnnee()+" au lieu de 2");
         assertEquals("SpecialiteTest",cl.getSpecialite(),"specialite de la classe non enregistré : "+cl.getSpecialite()+" au lieu de SpecialiteTest");
-        assertEquals("NbreelevesTest",cl.getNbreeleves(),"nbreeleves de la classe non enregistré : "+cl.getNbreeleves()+" au lieu de NbreelevesTest");
+        assertEquals(23,cl.getNbreeleves(),"nbreeleves de la classe non enregistré : "+cl.getNbreeleves()+" au lieu de 23");
 
     }
 
@@ -59,9 +61,9 @@ class ClasseServiceImplTest {
 
             Classe cl2=classeServiceImpl.read(cl);
             assertEquals("SigleTest",cl2.getSigle(),"sigles différents "+"SigleTest"+"-"+cl2.getSigle());
-            assertEquals("AnneeTest",cl2.getAnnee(),"annee différents "+"AnneeTest"+"-"+cl2.getAnnee());
+            assertEquals(2,cl2.getAnnee(),"annee différents "+2+"-"+cl2.getAnnee());
             assertEquals("SpecialiteTest",cl2.getSpecialite(),"specialite différents "+"SpecialiteTest"+"-"+cl2.getSpecialite());
-            assertEquals("NbreelevesTest",cl2.getNbreeleves(),"nbreeleves différents "+"NbreelevesTest"+"-"+cl2.getNbreeleves());
+            assertEquals(23,cl2.getNbreeleves(),"nbreeleves différents "+23+"-"+cl2.getNbreeleves());
         }
         catch (Exception e){
             fail("recherche infructueuse "+e);
@@ -80,9 +82,9 @@ class ClasseServiceImplTest {
             cl.setNbreeleves(23);
             cl = classeServiceImpl.update(cl);
             assertEquals("SigleTest2",cl.getSigle(),"sigles différents "+"SigleTest2-"+cl.getSigle());
-            assertEquals("AnneeTest2",cl.getAnnee(),"annees différentes "+"AnneeTest2-"+cl.getAnnee());
+            assertEquals(2,cl.getAnnee(),"annees différentes "+"AnneeTest2-"+cl.getAnnee());
             assertEquals("SpecialiteTest2",cl.getSpecialite(),"specialites différentes "+"SpecialiteTest2-"+cl.getSpecialite());
-            assertEquals("NbreelevesTest2",cl.getNbreeleves(),"nbre d'eleves différentes "+"NbreelevesTest-"+cl.getNbreeleves());
+            assertEquals(23,cl.getNbreeleves(),"nbre d'eleves différentes "+"NbreelevesTest-"+cl.getNbreeleves());
 
         }
         catch(Exception e){
@@ -114,5 +116,18 @@ class ClasseServiceImplTest {
         catch (Exception e){
             fail("erreur de recherche de tous les classes "+e);
         }
+    }
+
+    @Test
+    void rechClasse(){
+
+        List<Classe> lc = classeServiceImpl.read("SpecialiteTest");
+        boolean trouve=false;
+        for(Classe c : lc){
+            if(c.getSpecialite().equals("SpecialiteTest")) trouve=true;
+            else fail("un record ne correspond pas , specialite = "+c.getSpecialite());
+        }
+        assertTrue(trouve,"record specialite trouvé dans la liste");
+
     }
 }

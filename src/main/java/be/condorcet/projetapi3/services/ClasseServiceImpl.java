@@ -10,14 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(rollbackOn = Exception.class)
 public class ClasseServiceImpl implements InterfClasseService {
     @Autowired
     private ClasseRepository classeRepository;
 
     @Override
     public List<Classe> read(String specialite) {
-        return classeRepository.findClassesBySpecialiteLike(specialite);
+        return classeRepository.findClassesBySpecialiteLike(specialite+"%");
+    }
+
+    @Override
+    public Classe rechClasse(String sigle) {
+        return classeRepository.findClasseBySigleLike(sigle);
     }
 
     @Override
@@ -28,8 +32,7 @@ public class ClasseServiceImpl implements InterfClasseService {
 
     @Override
     public Classe read(Classe classe) throws Exception {
-        Optional<Classe> ocl = classeRepository.findById(classe.getIdclasse());
-        return ocl.get();
+        return classeRepository.findById(classe.getIdclasse()).get();
     }
 
     @Override

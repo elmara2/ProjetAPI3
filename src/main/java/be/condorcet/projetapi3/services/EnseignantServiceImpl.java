@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(rollbackOn = Exception.class)
 public class EnseignantServiceImpl implements InterfEnseignantService{
     @Autowired
     private EnseignantRepository enseignantRepository;
@@ -42,5 +41,15 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
     @Override
     public List<Enseignant> all() throws Exception {
         return enseignantRepository.findAll();
+    }
+
+    @Override
+    public List<Enseignant> read(String nom) {
+        return enseignantRepository.findEnseignantsByNomLike(nom);
+    }
+
+    @Override
+    public Enseignant rechEnseignant(String matricule) {
+        return enseignantRepository.findEnseignantByMatriculeLike(matricule);
     }
 }

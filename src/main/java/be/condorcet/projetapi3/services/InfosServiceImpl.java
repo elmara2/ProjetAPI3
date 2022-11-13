@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(rollbackOn = Exception.class)
 public class InfosServiceImpl implements InterfInfosService{
     @Autowired
     private InfosRepository infosRepository;
@@ -43,5 +42,10 @@ public class InfosServiceImpl implements InterfInfosService{
     @Override
     public List<Infos> all() throws Exception {
         return infosRepository.findAll();
+    }
+
+    @Override
+    public List<Infos> read(Integer nbreheures) {
+        return infosRepository.findInfosByNbreheuresLike(nbreheures);
     }
 }

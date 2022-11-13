@@ -27,7 +27,7 @@ public class Infos {
     @JoinColumn(name = "IDCOURS",insertable = false,updatable = false)
     private Cours cours;
 
-
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "IDENSEIGNANT")
     private Enseignant enseignant;

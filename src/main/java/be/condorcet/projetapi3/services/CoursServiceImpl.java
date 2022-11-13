@@ -10,10 +10,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(rollbackOn = Exception.class)
 public class CoursServiceImpl implements InterfCoursService{
     @Autowired
     private CoursRepository coursRepository;
+
+    @Override
+    public List<Cours> read(String intitule) {
+        return coursRepository.findCoursByIntituleLike(intitule);
+    }
+
+    @Override
+    public Cours rechCours(String code) {
+        return coursRepository.findCoursByCodeLike(code);
+    }
+
     @Override
     public Cours create(Cours cours) throws Exception {
         coursRepository.save(cours);
@@ -22,8 +32,8 @@ public class CoursServiceImpl implements InterfCoursService{
 
     @Override
     public Cours read(Cours cours) throws Exception {
-        Optional<Cours> ocrs = coursRepository.findById(cours.getIdcours());
-        return ocrs.get();
+        return coursRepository.findById(cours.getIdcours()).get();
+
     }
 
     @Override

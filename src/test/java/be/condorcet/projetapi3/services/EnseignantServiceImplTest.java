@@ -1,6 +1,7 @@
 package be.condorcet.projetapi3.services;
 
 import be.condorcet.projetapi3.entities.Classe;
+import be.condorcet.projetapi3.entities.Cours;
 import be.condorcet.projetapi3.entities.Enseignant;
 import be.condorcet.projetapi3.entities.Salle;
 import org.junit.jupiter.api.AfterEach;
@@ -29,7 +30,7 @@ class EnseignantServiceImplTest {
     @BeforeEach
     void setUp() {
         try{
-            sal = new Salle(null,"SigleTest",1000,new ArrayList<>(),new ArrayList<>());
+            sal = new Salle(null,"SigleTest",23,new ArrayList<>(),new ArrayList<>());
             salleServiceImpl.create(sal);
             System.out.println("création de la salle : "+sal);
             ens = new Enseignant(null,"MatriculeTest","NomTest","PrenomTest","TelTest","ChargeSemTest",2500.23, LocalDate.now(),sal,new ArrayList<>());
@@ -60,8 +61,8 @@ class EnseignantServiceImplTest {
         assertEquals("PrenomTest",ens.getPrenom(),"prenom de l'enseignant non enregistré : "+ens.getPrenom()+" au lieu de PrenomTest");
         assertEquals("TelTest",ens.getTel(),"telephone de l'enseignant non enregistré : "+ens.getTel()+" au lieu de TelTest");
         assertEquals("ChargeSemTest",ens.getChargesem(),"chargesem de l'enseignant non enregistré : "+ens.getChargesem()+ " au lieu de ChargeSemTest");
-        assertEquals("SalaireMensuTest",ens.getSalairemensu(),"salairemensu de l'enseignant non enregistré : "+ens.getSalairemensu()+" au lieu de SalaireMensuTest");
-        assertEquals("DateEngag",ens.getDateengag(),"date de l'enseignant non enregistré : "+ens.getDateengag()+" au lieu de DateEngagTest");
+        assertEquals(2500.23,ens.getSalairemensu(),"salairemensu de l'enseignant non enregistré : "+ens.getSalairemensu()+" au lieu de SalaireMensuTest");
+        assertEquals(LocalDate.now(),ens.getDateengag(),"date de l'enseignant non enregistré : "+ens.getDateengag()+" au lieu de DateEngagTest");
 
     }
 
@@ -75,8 +76,8 @@ class EnseignantServiceImplTest {
             assertEquals("TelTest",ens2.getTel(),"telephones différents "+"TelTest"+"-"+ens2.getTel());
 
             assertEquals("ChargeSemTest",ens2.getChargesem(),"chargesem différentes "+"ChargeSemTest"+"-"+ens2.getChargesem());
-            assertEquals("SalaireMensuTest",ens2.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest"+"-"+ens2.getSalairemensu());
-            assertEquals("DateEngag",ens2.getDateengag(),"dateengag différentes "+"DateEngag"+"-"+ens2.getDateengag());
+            assertEquals(2500.23,ens2.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest"+"-"+ens2.getSalairemensu());
+            assertEquals(LocalDate.now(),ens2.getDateengag(),"dateengag différentes "+"DateEngag"+"-"+ens2.getDateengag());
         }
         catch (Exception e){
             fail("recherche infructueuse "+e);
@@ -92,7 +93,7 @@ class EnseignantServiceImplTest {
             ens.setPrenom("PrenomTest2");
             ens.setTel("TelTest2");
             ens.setChargesem("ChargeSemTest2");
-            ens.setSalairemensu(2500.34);
+            ens.setSalairemensu(2500.23);
             ens.setDateengag(LocalDate.now());
             ens = enseignantServiceImpl.update(ens);
             assertEquals("MatriculeTest2",ens.getMatricule(),"matricules différents "+"MatriculeTest2-"+ens.getMatricule());
@@ -101,8 +102,8 @@ class EnseignantServiceImplTest {
             assertEquals("TelTest2",ens.getTel(),"telephones différents "+"TelTest2-"+ens.getTel());
 
             assertEquals("ChargeSemTest2",ens.getChargesem(),"chargesem différentes "+"ChargeSemTest2-"+ens.getChargesem());
-            assertEquals("SalaireMensuTest2",ens.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest2-"+ens.getSalairemensu());
-            assertEquals("DateEngagTest2",ens.getDateengag(),"dates différentes "+"DateEngagTest2-"+ens.getDateengag());
+            assertEquals(2500.23,ens.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest2-"+ens.getSalairemensu());
+            assertEquals(LocalDate.now(),ens.getDateengag(),"dates différentes "+"DateEngagTest2-"+ens.getDateengag());
 
         }
         catch(Exception e){
@@ -130,5 +131,16 @@ class EnseignantServiceImplTest {
             assertNotEquals(0,lens.size(),"la liste ne contient aucun élément");
         }catch (Exception e){ fail("erreur de recherche de tous les enseignants "+e);
         }
+    }
+
+    @Test
+    void rechEnseignant(){
+        List<Enseignant> lens = enseignantServiceImpl.read("NomTest");
+        boolean trouve=false;
+        for(Enseignant e : lens){
+            if(e.getNom().equals("NomTest")) trouve=true;
+            else fail("un record ne correspond pas , intitule = "+e.getNom());
+        }
+        assertTrue(trouve,"record nom trouvé dans la liste");
     }
 }

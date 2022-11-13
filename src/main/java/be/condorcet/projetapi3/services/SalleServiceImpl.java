@@ -41,4 +41,14 @@ public class SalleServiceImpl implements InterfSalleService{
     public List<Salle> all() throws Exception {
         return salleRepository.findAll();
     }
+
+    @Override
+    public List<Salle> read(int capacite) {
+        return salleRepository.findSallesByCapaciteLike(capacite);
+    }
+
+    @Override
+    public Salle rechSalle(String sigle) {
+        return salleRepository.findSalleBySigleLike(sigle);
+    }
 }

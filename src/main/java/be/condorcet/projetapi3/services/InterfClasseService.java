@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface InterfClasseService extends InterfService<Classe>{
     public List<Classe> read(String sigle);
+    public Classe rechClasse(String sigle);
 }
