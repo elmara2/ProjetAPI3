@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface ClasseRepository extends JpaRepository<Classe,Integer> {
-    public Classe findClasseByIdclasseLike(Integer id);
+    public Classe findClasseByIdclasseLike(Integer idclasse);
     public List<Classe> findClassesBySpecialiteLike(String specialite);
     public Classe findClasseBySigleLike(String sigle);
+    public void deleteClasseByIdclasse(Integer idclasse);
 }

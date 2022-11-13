@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface SalleRepository extends JpaRepository<Salle,Integer> {
-    public List<Salle> findSallesByCapaciteLike(Integer capacite);
+    public List<Salle> findSallesByCapacite(Integer capacite);
     public Salle findSalleBySigleLike(String sigle);
+    public Salle findSalleByIdsalle(Integer id);
+    public void deleteSalleByIdsalle(Integer id);
 }

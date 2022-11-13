@@ -32,7 +32,7 @@ public class CoursServiceImpl implements InterfCoursService{
 
     @Override
     public Cours read(Cours cours) throws Exception {
-        return coursRepository.findById(cours.getIdcours()).get();
+        return coursRepository.findCoursByIdcours(cours.getIdcours());
 
     }
 
@@ -45,7 +45,7 @@ public class CoursServiceImpl implements InterfCoursService{
 
     @Override
     public void delete(Cours cours) throws Exception {
-        coursRepository.deleteById(cours.getIdcours());
+        coursRepository.deleteCoursByIdcours(cours.getIdcours());
     }
 
     @Override

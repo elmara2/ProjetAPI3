@@ -61,9 +61,9 @@ class ClasseServiceImplTest {
 
             Classe cl2=classeServiceImpl.read(cl);
             assertEquals("SigleTest",cl2.getSigle(),"sigles différents "+"SigleTest"+"-"+cl2.getSigle());
-            assertEquals(2,cl2.getAnnee(),"annee différents "+2+"-"+cl2.getAnnee());
+            assertEquals(2,cl2.getAnnee(),"annee différents "+"AnneeTest"+"-"+cl2.getAnnee());
             assertEquals("SpecialiteTest",cl2.getSpecialite(),"specialite différents "+"SpecialiteTest"+"-"+cl2.getSpecialite());
-            assertEquals(23,cl2.getNbreeleves(),"nbreeleves différents "+23+"-"+cl2.getNbreeleves());
+            assertEquals(23,cl2.getNbreeleves(),"nbreeleves différents "+"NbreelevesTest"+"-"+cl2.getNbreeleves());
         }
         catch (Exception e){
             fail("recherche infructueuse "+e);

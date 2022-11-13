@@ -30,10 +30,10 @@ class EnseignantServiceImplTest {
     @BeforeEach
     void setUp() {
         try{
-            sal = new Salle(null,"SigleTest",23,new ArrayList<>(),new ArrayList<>());
+            sal = new Salle(null,"SigleTest11",23,new ArrayList<>(),new ArrayList<>());
             salleServiceImpl.create(sal);
             System.out.println("création de la salle : "+sal);
-            ens = new Enseignant(null,"MatriculeTest","NomTest","PrenomTest","TelTest","ChargeSemTest",2500.23, LocalDate.now(),sal,new ArrayList<>());
+            ens = new Enseignant(null,"MatriculeTest","NomTest","PrenomTest","TelTest","ChargeSemTest",2500.23, LocalDate.of(2022,11,11),sal,new ArrayList<>());
             enseignantServiceImpl.create(ens);
             System.out.println("création de l'enseignant : "+ens);
         }
@@ -62,7 +62,7 @@ class EnseignantServiceImplTest {
         assertEquals("TelTest",ens.getTel(),"telephone de l'enseignant non enregistré : "+ens.getTel()+" au lieu de TelTest");
         assertEquals("ChargeSemTest",ens.getChargesem(),"chargesem de l'enseignant non enregistré : "+ens.getChargesem()+ " au lieu de ChargeSemTest");
         assertEquals(2500.23,ens.getSalairemensu(),"salairemensu de l'enseignant non enregistré : "+ens.getSalairemensu()+" au lieu de SalaireMensuTest");
-        assertEquals(LocalDate.now(),ens.getDateengag(),"date de l'enseignant non enregistré : "+ens.getDateengag()+" au lieu de DateEngagTest");
+        assertEquals(LocalDate.of(2022,11,11),ens.getDateengag(),"date de l'enseignant non enregistré : "+ens.getDateengag()+" au lieu de DateEngagTest");
 
     }
 
@@ -74,10 +74,9 @@ class EnseignantServiceImplTest {
             assertEquals("NomTest",ens2.getNom(),"noms différents "+"NomTest"+"-"+ens2.getNom());
             assertEquals("PrenomTest",ens2.getPrenom(),"prenoms différents "+"PrenomTest"+"-"+ens2.getPrenom());
             assertEquals("TelTest",ens2.getTel(),"telephones différents "+"TelTest"+"-"+ens2.getTel());
-
             assertEquals("ChargeSemTest",ens2.getChargesem(),"chargesem différentes "+"ChargeSemTest"+"-"+ens2.getChargesem());
             assertEquals(2500.23,ens2.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest"+"-"+ens2.getSalairemensu());
-            assertEquals(LocalDate.now(),ens2.getDateengag(),"dateengag différentes "+"DateEngag"+"-"+ens2.getDateengag());
+            assertEquals(LocalDate.of(2022,11,11),ens2.getDateengag(),"dateengag différentes "+"DateEngag"+"-"+ens2.getDateengag());
         }
         catch (Exception e){
             fail("recherche infructueuse "+e);
@@ -94,7 +93,7 @@ class EnseignantServiceImplTest {
             ens.setTel("TelTest2");
             ens.setChargesem("ChargeSemTest2");
             ens.setSalairemensu(2500.23);
-            ens.setDateengag(LocalDate.now());
+            ens.setDateengag(LocalDate.of(2022,11,11));
             ens = enseignantServiceImpl.update(ens);
             assertEquals("MatriculeTest2",ens.getMatricule(),"matricules différents "+"MatriculeTest2-"+ens.getMatricule());
             assertEquals("NomTest2",ens.getNom(),"noms différents "+"NomTest2-"+ens.getNom());
@@ -103,7 +102,7 @@ class EnseignantServiceImplTest {
 
             assertEquals("ChargeSemTest2",ens.getChargesem(),"chargesem différentes "+"ChargeSemTest2-"+ens.getChargesem());
             assertEquals(2500.23,ens.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest2-"+ens.getSalairemensu());
-            assertEquals(LocalDate.now(),ens.getDateengag(),"dates différentes "+"DateEngagTest2-"+ens.getDateengag());
+            assertEquals(LocalDate.of(2022,11,11),ens.getDateengag(),"dates différentes "+"DateEngagTest2-"+ens.getDateengag());
 
         }
         catch(Exception e){

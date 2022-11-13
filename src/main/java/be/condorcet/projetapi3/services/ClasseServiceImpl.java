@@ -32,7 +32,7 @@ public class ClasseServiceImpl implements InterfClasseService {
 
     @Override
     public Classe read(Classe classe) throws Exception {
-        return classeRepository.findById(classe.getIdclasse()).get();
+        return classeRepository.findClasseByIdclasseLike(classe.getIdclasse());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ClasseServiceImpl implements InterfClasseService {
 
     @Override
     public void delete(Classe classe) throws Exception {
-        classeRepository.deleteById(classe.getIdclasse());
+        classeRepository.deleteClasseByIdclasse(classe.getIdclasse());
 
     }
 

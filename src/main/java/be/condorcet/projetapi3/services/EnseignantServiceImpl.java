@@ -22,8 +22,8 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
 
     @Override
     public Enseignant read(Enseignant enseignant) throws Exception {
-        Optional<Enseignant> oens = enseignantRepository.findById(enseignant.getIdenseignant());
-        return oens.get();
+        return enseignantRepository.findEnseignantByIdenseignant(enseignant.getIdenseignant());
+
     }
 
     @Override
@@ -35,7 +35,7 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
 
     @Override
     public void delete(Enseignant enseignant) throws Exception {
-        enseignantRepository.deleteById(enseignant.getIdenseignant());
+        enseignantRepository.deleteEnseignantByIdenseignant(enseignant.getIdenseignant());
     }
 
     @Override

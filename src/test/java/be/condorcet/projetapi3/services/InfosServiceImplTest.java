@@ -46,7 +46,6 @@ class InfosServiceImplTest {
             ens = new Enseignant(null,"MatriculeTest","NomTest","PrenomTest","TelTest","ChargeSemTest",2500.23, LocalDate.now(),sal,new ArrayList<>());
             enseignantServiceImpl.create(ens);
             System.out.println("création de l'enseignant : "+ens);
-
             inf = new Infos(null,3,cl,crs,ens,sal);
             infosServiceImpl.create(inf);
             System.out.println("création de l'infos : "+cl);

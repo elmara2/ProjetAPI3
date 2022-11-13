@@ -106,7 +106,7 @@ class SalleServiceImplTest {
 
     @Test
     void rechSalle(){
-        List<Salle> lsal = salleServiceImpl.read(13);
+        List<Salle> lsal = salleServiceImpl.read(23);
         boolean trouve=false;
         for(Salle s : lsal){
             if(s.getCapacite().equals(13)) trouve=true;

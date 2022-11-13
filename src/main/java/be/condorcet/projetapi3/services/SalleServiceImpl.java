@@ -6,6 +6,7 @@ import be.condorcet.projetapi3.repositories.SalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,15 @@ import java.util.Optional;
 public class SalleServiceImpl implements InterfSalleService{
     @Autowired
     private SalleRepository salleRepository;
+
+    @Override
+    public List<Salle> read(int capacite) {
+        return salleRepository.findSallesByCapacite(capacite);
+    }
+    @Override
+    public Salle rechSalle(String sigle) {
+        return salleRepository.findSalleBySigleLike(sigle);
+    }
     @Override
     public Salle create(Salle salle) throws Exception {
         salleRepository.save(salle);
@@ -21,8 +31,8 @@ public class SalleServiceImpl implements InterfSalleService{
 
     @Override
     public Salle read(Salle salle) throws Exception {
-        Optional<Salle> osal = salleRepository.findById(salle.getIdsalle());
-        return osal.get();
+        return salleRepository.findSalleByIdsalle(salle.getIdsalle());
+
     }
 
     @Override
@@ -34,7 +44,7 @@ public class SalleServiceImpl implements InterfSalleService{
 
     @Override
     public void delete(Salle salle) throws Exception {
-        salleRepository.deleteById(salle.getIdsalle());
+        salleRepository.deleteSalleByIdsalle(salle.getIdsalle());
     }
 
     @Override
@@ -42,13 +52,6 @@ public class SalleServiceImpl implements InterfSalleService{
         return salleRepository.findAll();
     }
 
-    @Override
-    public List<Salle> read(int capacite) {
-        return salleRepository.findSallesByCapaciteLike(capacite);
-    }
 
-    @Override
-    public Salle rechSalle(String sigle) {
-        return salleRepository.findSalleBySigleLike(sigle);
-    }
+
 }
