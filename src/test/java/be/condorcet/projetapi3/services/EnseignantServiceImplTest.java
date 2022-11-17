@@ -20,17 +20,20 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class EnseignantServiceImplTest {
 
-    private Salle sal;
+
     @Autowired
     private EnseignantServiceImpl enseignantServiceImpl;
     Enseignant ens;
     @Autowired
     private SalleServiceImpl salleServiceImpl;
 
+    Salle sal;
+
+
     @BeforeEach
     void setUp() {
         try{
-            sal = new Salle(null,"SigleTest11",23,new ArrayList<>(),new ArrayList<>());
+            sal = new Salle(null,"SigleTest",23,new ArrayList<>(),new ArrayList<>());
             salleServiceImpl.create(sal);
             System.out.println("création de la salle : "+sal);
             ens = new Enseignant(null,"MatriculeTest","NomTest","PrenomTest","TelTest","ChargeSemTest",2500.23, LocalDate.of(2022,11,11),sal,new ArrayList<>());
@@ -77,6 +80,7 @@ class EnseignantServiceImplTest {
             assertEquals("ChargeSemTest",ens2.getChargesem(),"chargesem différentes "+"ChargeSemTest"+"-"+ens2.getChargesem());
             assertEquals(2500.23,ens2.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest"+"-"+ens2.getSalairemensu());
             assertEquals(LocalDate.of(2022,11,11),ens2.getDateengag(),"dateengag différentes "+"DateEngag"+"-"+ens2.getDateengag());
+
         }
         catch (Exception e){
             fail("recherche infructueuse "+e);
@@ -92,17 +96,16 @@ class EnseignantServiceImplTest {
             ens.setPrenom("PrenomTest2");
             ens.setTel("TelTest2");
             ens.setChargesem("ChargeSemTest2");
-            ens.setSalairemensu(2500.23);
-            ens.setDateengag(LocalDate.of(2022,11,11));
+            ens.setSalairemensu(20.23);
+            ens.setDateengag(LocalDate.of(2021,11,11));
             ens = enseignantServiceImpl.update(ens);
             assertEquals("MatriculeTest2",ens.getMatricule(),"matricules différents "+"MatriculeTest2-"+ens.getMatricule());
             assertEquals("NomTest2",ens.getNom(),"noms différents "+"NomTest2-"+ens.getNom());
             assertEquals("PrenomTest2",ens.getPrenom(),"prenoms différents "+"PrenomTest2-"+ens.getPrenom());
             assertEquals("TelTest2",ens.getTel(),"telephones différents "+"TelTest2-"+ens.getTel());
-
             assertEquals("ChargeSemTest2",ens.getChargesem(),"chargesem différentes "+"ChargeSemTest2-"+ens.getChargesem());
-            assertEquals(2500.23,ens.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest2-"+ens.getSalairemensu());
-            assertEquals(LocalDate.of(2022,11,11),ens.getDateengag(),"dates différentes "+"DateEngagTest2-"+ens.getDateengag());
+            assertEquals(20.23,ens.getSalairemensu(),"salairemensu différents "+"SalaireMensuTest2-"+ens.getSalairemensu());
+            assertEquals(LocalDate.of(2021,11,11),ens.getDateengag(),"dates différentes "+"DateEngagTest2-"+ens.getDateengag());
 
         }
         catch(Exception e){
@@ -128,7 +131,8 @@ class EnseignantServiceImplTest {
         try {
             List<Enseignant> lens = enseignantServiceImpl.all();
             assertNotEquals(0,lens.size(),"la liste ne contient aucun élément");
-        }catch (Exception e){ fail("erreur de recherche de tous les enseignants "+e);
+        }catch (Exception e){
+            fail("erreur de recherche de tous les enseignants "+e);
         }
     }
 
@@ -137,7 +141,7 @@ class EnseignantServiceImplTest {
         List<Enseignant> lens = enseignantServiceImpl.read("NomTest");
         boolean trouve=false;
         for(Enseignant e : lens){
-            if(e.getNom().equals("NomTest")) trouve=true;
+            if(e.getNom().startsWith("NomTest")) trouve=true;
             else fail("un record ne correspond pas , intitule = "+e.getNom());
         }
         assertTrue(trouve,"record nom trouvé dans la liste");

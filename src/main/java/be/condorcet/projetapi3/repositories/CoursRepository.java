@@ -11,6 +11,4 @@ import java.util.List;
 public interface CoursRepository extends JpaRepository<Cours,Integer>{
     public List<Cours> findCoursByIntituleLike(String intitule);
     public Cours findCoursByCodeLike(String code);
-    public Cours findCoursByIdcours(Integer idcours);
-    public void deleteCoursByIdcours(Integer idcours);
 }

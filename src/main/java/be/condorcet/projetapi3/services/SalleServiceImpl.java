@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class SalleServiceImpl implements InterfSalleService{
     @Autowired
     private SalleRepository salleRepository;
@@ -31,7 +32,7 @@ public class SalleServiceImpl implements InterfSalleService{
 
     @Override
     public Salle read(Salle salle) throws Exception {
-        return salleRepository.findSalleByIdsalle(salle.getIdsalle());
+        return salleRepository.findById(salle.getIdsalle()).get();
 
     }
 
@@ -44,7 +45,7 @@ public class SalleServiceImpl implements InterfSalleService{
 
     @Override
     public void delete(Salle salle) throws Exception {
-        salleRepository.deleteSalleByIdsalle(salle.getIdsalle());
+        salleRepository.deleteById(salle.getIdsalle());
     }
 
     @Override

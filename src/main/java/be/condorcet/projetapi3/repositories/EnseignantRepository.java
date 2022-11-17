@@ -10,6 +10,4 @@ import java.util.List;
 public interface EnseignantRepository extends JpaRepository<Enseignant,Integer> {
     public List<Enseignant> findEnseignantsByNomLike(String nom);
     public Enseignant findEnseignantByMatriculeLike(String matricule);
-    public Enseignant findEnseignantByIdenseignant(Integer id);
-    public void deleteEnseignantByIdenseignant(Integer id);
 }

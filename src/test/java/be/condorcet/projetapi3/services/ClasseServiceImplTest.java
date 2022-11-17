@@ -124,7 +124,7 @@ class ClasseServiceImplTest {
         List<Classe> lc = classeServiceImpl.read("SpecialiteTest");
         boolean trouve=false;
         for(Classe c : lc){
-            if(c.getSpecialite().equals("SpecialiteTest")) trouve=true;
+            if(c.getSpecialite().startsWith("SpecialiteTest")) trouve=true;
             else fail("un record ne correspond pas , specialite = "+c.getSpecialite());
         }
         assertTrue(trouve,"record specialite trouvé dans la liste");

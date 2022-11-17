@@ -109,7 +109,7 @@ class SalleServiceImplTest {
         List<Salle> lsal = salleServiceImpl.read(23);
         boolean trouve=false;
         for(Salle s : lsal){
-            if(s.getCapacite().equals(13)) trouve=true;
+            if(s.getCapacite().equals(23)) trouve=true;
             else fail("un record ne correspond pas , capacite = "+s.getCapacite());
         }
         assertTrue(trouve,"record capacite trouvé dans la liste");

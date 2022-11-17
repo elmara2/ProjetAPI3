@@ -22,6 +22,7 @@ class CoursServiceImplTest {
     private CoursServiceImpl coursServiceImpl;
 
     Cours crs;
+
     @BeforeEach
     void setUp() {
         try{
@@ -97,7 +98,8 @@ class CoursServiceImplTest {
         try {
             List<Cours> lcrs = coursServiceImpl.all();
             assertNotEquals(0,lcrs.size(),"la liste ne contient aucun élément");
-        }catch (Exception e){ fail("erreur de recherche de tous les cours "+e);
+        }catch (Exception e){
+            fail("erreur de recherche de tous les cours "+e);
         }
     }
 
@@ -106,7 +108,7 @@ class CoursServiceImplTest {
         List<Cours> lcrs = coursServiceImpl.read("IntituleTest");
         boolean trouve=false;
         for(Cours c : lcrs){
-            if(c.getIntitule().equals("IntituleTest")) trouve=true;
+            if(c.getIntitule().startsWith("IntituleTest")) trouve=true;
             else fail("un record ne correspond pas , intitule = "+c.getIntitule());
         }
         assertTrue(trouve,"record intitule trouvé dans la liste");

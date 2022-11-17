@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class InfosServiceImpl implements InterfInfosService{
     @Autowired
     private InfosRepository infosRepository;

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class ClasseServiceImpl implements InterfClasseService {
     @Autowired
     private ClasseRepository classeRepository;
@@ -32,7 +33,7 @@ public class ClasseServiceImpl implements InterfClasseService {
 
     @Override
     public Classe read(Classe classe) throws Exception {
-        return classeRepository.findClasseByIdclasseLike(classe.getIdclasse());
+        return classeRepository.findById(classe.getIdclasse()).get();
     }
 
     @Override
@@ -44,7 +45,7 @@ public class ClasseServiceImpl implements InterfClasseService {
 
     @Override
     public void delete(Classe classe) throws Exception {
-        classeRepository.deleteClasseByIdclasse(classe.getIdclasse());
+        classeRepository.deleteById(classe.getIdclasse());
 
     }
 

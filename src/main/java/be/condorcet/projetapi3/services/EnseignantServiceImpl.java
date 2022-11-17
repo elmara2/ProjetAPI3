@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class EnseignantServiceImpl implements InterfEnseignantService{
     @Autowired
     private EnseignantRepository enseignantRepository;
@@ -22,7 +23,7 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
 
     @Override
     public Enseignant read(Enseignant enseignant) throws Exception {
-        return enseignantRepository.findEnseignantByIdenseignant(enseignant.getIdenseignant());
+        return enseignantRepository.findById(enseignant.getIdenseignant()).get();
 
     }
 
@@ -35,7 +36,7 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
 
     @Override
     public void delete(Enseignant enseignant) throws Exception {
-        enseignantRepository.deleteEnseignantByIdenseignant(enseignant.getIdenseignant());
+        enseignantRepository.deleteById(enseignant.getIdenseignant());
     }
 
     @Override
