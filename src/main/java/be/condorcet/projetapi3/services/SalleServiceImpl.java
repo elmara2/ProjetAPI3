@@ -4,6 +4,8 @@ import be.condorcet.projetapi3.entities.Cours;
 import be.condorcet.projetapi3.entities.Salle;
 import be.condorcet.projetapi3.repositories.SalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -53,6 +55,10 @@ public class SalleServiceImpl implements InterfSalleService{
         return salleRepository.findAll();
     }
 
+    @Override
+    public Page<Salle> allp(Pageable pageable) throws Exception {
+        return salleRepository.findAll(pageable);
+    }
 
 
 }

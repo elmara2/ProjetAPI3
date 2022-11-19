@@ -3,6 +3,8 @@ package be.condorcet.projetapi3.services;
 import be.condorcet.projetapi3.entities.Cours;
 import be.condorcet.projetapi3.repositories.CoursRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -52,5 +54,10 @@ public class CoursServiceImpl implements InterfCoursService{
     @Override
     public List<Cours> all() throws Exception {
         return coursRepository.findAll();
+    }
+
+    @Override
+    public Page<Cours> allp(Pageable pageable) throws Exception {
+        return coursRepository.findAll(pageable);
     }
 }

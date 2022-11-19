@@ -5,6 +5,8 @@ import be.condorcet.projetapi3.entities.Infos;
 import be.condorcet.projetapi3.entities.InfosPK;
 import be.condorcet.projetapi3.repositories.InfosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -43,6 +45,11 @@ public class InfosServiceImpl implements InterfInfosService{
     @Override
     public List<Infos> all() throws Exception {
         return infosRepository.findAll();
+    }
+
+    @Override
+    public Page<Infos> allp(Pageable pageable) throws Exception {
+        return null;
     }
 
     @Override

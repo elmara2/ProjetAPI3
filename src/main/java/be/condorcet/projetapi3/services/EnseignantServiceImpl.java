@@ -4,6 +4,8 @@ import be.condorcet.projetapi3.entities.Cours;
 import be.condorcet.projetapi3.entities.Enseignant;
 import be.condorcet.projetapi3.repositories.EnseignantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -42,6 +44,11 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
     @Override
     public List<Enseignant> all() throws Exception {
         return enseignantRepository.findAll();
+    }
+
+    @Override
+    public Page<Enseignant> allp(Pageable pageable) throws Exception {
+        return null;
     }
 
     @Override
