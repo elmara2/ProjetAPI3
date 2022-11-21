@@ -48,7 +48,7 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
 
     @Override
     public Page<Enseignant> allp(Pageable pageable) throws Exception {
-        return null;
+        return enseignantRepository.findAll(pageable);
     }
 
     @Override

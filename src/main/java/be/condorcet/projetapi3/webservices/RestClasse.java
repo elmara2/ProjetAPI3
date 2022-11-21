@@ -1,6 +1,7 @@
 package be.condorcet.projetapi3.webservices;
 
 import be.condorcet.projetapi3.entities.Classe;
+import be.condorcet.projetapi3.entities.Cours;
 import be.condorcet.projetapi3.services.InterfClasseService;
 import be.condorcet.projetapi3.services.InterfService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,12 +91,16 @@ public class RestClasse {
         return ResponseEntity.notFound().header("error",ex.getMessage()).build();
     }
 
+
+
     //--------Retrouver toutes les classes triés et par pages--------------------------------
     @RequestMapping(value = "/allp",method = RequestMethod.GET)
     public ResponseEntity<Page<Classe>> listClasse(Pageable pageable) throws Exception{
         System.out.println("recherche de toutes les classes");
         return new ResponseEntity<>(classeServiceImpl.allp(pageable), HttpStatus.OK);
     }
+
+
 
 }
 

@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+@NoArgsConstructor @AllArgsConstructor
 @Embeddable
 public class InfosPK implements Serializable {
     @Column(name = "idclasse")

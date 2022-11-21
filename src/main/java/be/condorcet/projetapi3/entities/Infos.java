@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Infos {
 
     @EmbeddedId
-    private InfosPK id_infos = new InfosPK();
+    private InfosPK id_infos;
 
     @Column(name = "nbreheures")
     private Integer nbreheures;
@@ -27,7 +27,7 @@ public class Infos {
     @JoinColumn(name = "IDCOURS",insertable = false,updatable = false)
     private Cours cours;
 
-    @NonNull
+
     @ManyToOne
     @JoinColumn(name = "IDENSEIGNANT")
     private Enseignant enseignant;

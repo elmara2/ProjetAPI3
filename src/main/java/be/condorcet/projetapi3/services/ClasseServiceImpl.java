@@ -1,6 +1,8 @@
 package be.condorcet.projetapi3.services;
 
 import be.condorcet.projetapi3.entities.Classe;
+import be.condorcet.projetapi3.entities.Cours;
+import be.condorcet.projetapi3.entities.Infos;
 import be.condorcet.projetapi3.repositories.ClasseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +28,7 @@ public class ClasseServiceImpl implements InterfClasseService {
     public Classe rechClasse(String sigle) {
         return classeRepository.findClasseBySigleLike(sigle);
     }
+
 
     @Override
     public Classe create(Classe classe) throws Exception {
