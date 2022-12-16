@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface InfosRepository extends JpaRepository<Infos, InfosPK> {
     public List<Infos> findInfosByNbreheuresLike(Integer nbreheures);
+
 }

@@ -18,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/enseignants")
+@CrossOrigin(origins = "*", allowedHeaders = "*",exposedHeaders = "*")
 public class RestEnseignant {
 
     @Autowired

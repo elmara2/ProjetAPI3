@@ -17,6 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/salles")
+@CrossOrigin(origins = "*", allowedHeaders = "*",exposedHeaders = "*")
 public class RestSalle {
 
     @Autowired

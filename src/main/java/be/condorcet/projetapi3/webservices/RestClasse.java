@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/classes")
+@CrossOrigin(origins = "*", allowedHeaders = "*",exposedHeaders = "*")
 public class RestClasse {
 
     @Autowired

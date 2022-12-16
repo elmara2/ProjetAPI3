@@ -26,6 +26,7 @@ public class InfosServiceImpl implements InterfInfosService{
 
     @Override
     public Infos read(Infos infos) throws Exception {
+
         Infos inf = infosRepository.findById(infos.getId_infos()).get();
         return inf;
     }
@@ -49,7 +50,7 @@ public class InfosServiceImpl implements InterfInfosService{
 
     @Override
     public Page<Infos> allp(Pageable pageable) throws Exception {
-        return null;
+        return infosRepository.findAll(pageable);
     }
 
     @Override

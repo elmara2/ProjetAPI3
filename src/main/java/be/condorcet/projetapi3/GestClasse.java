@@ -54,7 +54,7 @@ public class GestClasse {
     public String read(@RequestParam int idclasse, Map<String, Object> model){
         System.out.println("recherche de la classe "+idclasse);
         try {
-            model.put("macl",classeRepository.findClasseByIdclasseLike(idclasse));
+            model.put("macl",classeRepository.findById(idclasse));
         }catch (Exception e) {
             System.out.println("----------erreur lors de la recherche ----- " + e);
             model.put("error",e.getMessage());
@@ -67,7 +67,7 @@ public class GestClasse {
     public String rechClass(@RequestParam int idclasse, Map<String, Object> model){
         System.out.println("recherche de la classe "+idclasse);
         try{
-            model.put("macl",classeRepository.findClasseByIdclasseLike(idclasse));
+            model.put("macl",classeRepository.findById(idclasse));
         }
         catch (Exception e){
             System.out.println("----------erreur lors de la recherche ----- " + e);
@@ -93,7 +93,7 @@ public class GestClasse {
                 classeRepository.save(cl);
             });
 
-            model.put("macl",classeRepository.findClasseByIdclasseLike(idclasse));
+            model.put("macl",classeRepository.findById(idclasse));
         } catch (Exception e) {
             System.out.println("----------erreur lors de la modification-------" + e);
             model.put("error",e.getMessage());
