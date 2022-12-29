@@ -2,6 +2,8 @@ package be.condorcet.projetapi3.webservices;
 
 import be.condorcet.projetapi3.entities.Classe;
 import be.condorcet.projetapi3.entities.Enseignant;
+import be.condorcet.projetapi3.entities.Infos;
+import be.condorcet.projetapi3.entities.Salle;
 import be.condorcet.projetapi3.services.InterfClasseService;
 import be.condorcet.projetapi3.services.InterfEnseignantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +89,23 @@ public class RestEnseignant {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/idens={idens}/idsal={idsal}", method = RequestMethod.PUT)
+    public ResponseEntity<Enseignant> ModifSalleDeEns(@PathVariable(value = "idens") int idens,@PathVariable(value = "idsal") int idsal) throws Exception{
+        System.out.println("modification de la salle de l'enseignant d'idens " + idens);
+        Enseignant ens = new Enseignant(idens,"","","","","",200,LocalDate.of(2022,11,11),null,new ArrayList<>());
+        Salle sal = new Salle(idsal,"",1,new ArrayList<>(),new ArrayList<>());
+        ens=enseignantServiceImpl.modifSalleDeEnseignant(ens,sal);
+        return new ResponseEntity<>(ens,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/salle/idenseignant={id}", method = RequestMethod.GET)
+    public ResponseEntity<Salle> salleDeEnseignant(@PathVariable(value = "id") int id) throws Exception{
+        System.out.println("recherche de la salle de l'enseignant d'id " + id);
+        Enseignant ens = new Enseignant(id,"","","","","",200,LocalDate.of(2022,11,11),null,new ArrayList<>());
+        Salle sal=enseignantServiceImpl.rechSalleDeEnseignant(ens);
+        return new ResponseEntity<>(sal,HttpStatus.OK);
+    }
+
     //-------------------Gérer les erreurs--------------------------------------------------------
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Void> handleIOException(Exception ex) {
@@ -101,4 +120,10 @@ public class RestEnseignant {
         return new ResponseEntity<>(enseignantServiceImpl.allp(pageable), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/infos/idens={idens}",method = RequestMethod.GET)
+    public ResponseEntity<List<Infos>> InfosEnseignant(@PathVariable(value = "idens") int idens) throws Exception{
+        System.out.println("infos de l'enseignant d'id "+idens);
+        Enseignant ens = new Enseignant(idens,"","","","","",2500.23,LocalDate.of(2022,11,11),null,new ArrayList<>());
+        return new ResponseEntity<>(enseignantServiceImpl.readInfos(ens),HttpStatus.OK);
+    }
 }

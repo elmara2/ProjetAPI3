@@ -3,7 +3,9 @@ package be.condorcet.projetapi3.services;
 import be.condorcet.projetapi3.entities.Classe;
 import be.condorcet.projetapi3.entities.Cours;
 import be.condorcet.projetapi3.entities.Infos;
+import be.condorcet.projetapi3.entities.Salle;
 import be.condorcet.projetapi3.repositories.ClasseRepository;
+import be.condorcet.projetapi3.repositories.InfosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,9 @@ import java.util.Optional;
 public class ClasseServiceImpl implements InterfClasseService {
     @Autowired
     private ClasseRepository classeRepository;
+
+    @Autowired
+    private InfosRepository infosRepository;
 
     @Override
     public List<Classe> read(String specialite) {
@@ -62,5 +67,11 @@ public class ClasseServiceImpl implements InterfClasseService {
     @Override
     public Page<Classe> allp(Pageable pageable) throws Exception {
         return classeRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Infos> readInfos(Classe classe) throws Exception {
+        classe=read(classe);
+        return classe.getListInfos();
     }
 }

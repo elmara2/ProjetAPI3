@@ -1,6 +1,8 @@
 package be.condorcet.projetapi3.webservices;
 
 import be.condorcet.projetapi3.entities.Cours;
+import be.condorcet.projetapi3.entities.Enseignant;
+import be.condorcet.projetapi3.entities.Infos;
 import be.condorcet.projetapi3.entities.Salle;
 import be.condorcet.projetapi3.services.InterfCoursService;
 import be.condorcet.projetapi3.services.InterfSalleService;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,4 +103,36 @@ public class RestSalle {
         return new ResponseEntity<>(salleServiceImpl.allp(pageable), HttpStatus.OK);
     }
 
+
+    @RequestMapping(value = "/enseignants/idsalle={idsalle}",method = RequestMethod.GET)
+    public ResponseEntity<List<Enseignant>> listEnseignant(@PathVariable(value = "idsalle") int idsalle) throws Exception{
+        System.out.println("recherche de tous les enseignants de la salle d'id "+idsalle);
+        Salle sal = new Salle(idsalle,"",1,new ArrayList<>(),new ArrayList<>());
+        return new ResponseEntity<>(salleServiceImpl.listEnseignant(sal), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/idsalle={idsalle}/idenseignant={idenseignant}",method = RequestMethod.PUT)
+    public ResponseEntity<Void> ajoutEnseignant(@PathVariable(value = "idsalle") int idsalle,@PathVariable(value = "idenseignant") int idenseignant) throws Exception{
+        System.out.println("ajout de l'enseignant d'id "+idenseignant+" a la salle d'id "+idsalle);
+        Salle sal = new Salle(idsalle,"",1,new ArrayList<>(),new ArrayList<>());
+        Enseignant ens = new Enseignant(idenseignant,"","","","","",2500.23, LocalDate.of(2022,11,11),null,new ArrayList<>());
+        salleServiceImpl.ajoutEnseignant(ens,sal);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/idsalle={idsalle}/idenseignant={idenseignant}",method = RequestMethod.DELETE)
+    public ResponseEntity<Void> suppEnseignant(@PathVariable(value = "idsalle") int idsalle,@PathVariable(value = "idenseignant") int idenseignant) throws Exception{
+        System.out.println("suppression de l'enseignant d'id "+idenseignant+" de la salle d'id "+idsalle);
+        Salle sal = new Salle(idsalle,"",1,new ArrayList<>(),new ArrayList<>());
+        Enseignant ens = new Enseignant(idenseignant,"","","","","",2500.23, LocalDate.of(2022,11,11),null,new ArrayList<>());
+        salleServiceImpl.suppEnseignant(ens,sal);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/infos/idsalle={idsalle}",method = RequestMethod.GET)
+    public ResponseEntity<List<Infos>> InfosSalle(@PathVariable(value = "idsalle") int idsalle) throws Exception{
+        System.out.println("infos de la salle d'id "+idsalle);
+        Salle sal = new Salle(idsalle,"",1,new ArrayList<>(),new ArrayList<>());
+        return new ResponseEntity<>(salleServiceImpl.readInfos(sal),HttpStatus.OK);
+    }
 }

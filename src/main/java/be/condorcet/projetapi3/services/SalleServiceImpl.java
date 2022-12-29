@@ -1,7 +1,11 @@
 package be.condorcet.projetapi3.services;
 
 import be.condorcet.projetapi3.entities.Cours;
+import be.condorcet.projetapi3.entities.Enseignant;
+import be.condorcet.projetapi3.entities.Infos;
 import be.condorcet.projetapi3.entities.Salle;
+import be.condorcet.projetapi3.repositories.EnseignantRepository;
+import be.condorcet.projetapi3.repositories.InfosRepository;
 import be.condorcet.projetapi3.repositories.SalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +22,9 @@ public class SalleServiceImpl implements InterfSalleService{
     @Autowired
     private SalleRepository salleRepository;
 
+    @Autowired
+    private EnseignantRepository enseignantRepository;
+
     @Override
     public List<Salle> read(int capacite) {
         return salleRepository.findSallesByCapacite(capacite);
@@ -26,6 +33,34 @@ public class SalleServiceImpl implements InterfSalleService{
     public Salle rechSalle(String sigle) {
         return salleRepository.findSalleBySigleLike(sigle);
     }
+
+    @Override
+    public List<Enseignant> listEnseignant(Salle salle) throws Exception {
+        salle = read(salle);
+        return salle.getListEnseignant();
+    }
+
+    @Override
+    public void ajoutEnseignant(Enseignant enseignant, Salle salle) throws Exception {
+        enseignant=enseignantRepository.findById(enseignant.getIdenseignant()).get();
+        salle=read(salle);
+        salle.getListEnseignant().add(enseignant);
+        enseignant.setSalle(salle);
+        salleRepository.save(salle);
+        enseignantRepository.save(enseignant);
+    }
+
+    @Override
+    public void suppEnseignant(Enseignant enseignant, Salle salle) throws Exception {
+     enseignant=enseignantRepository.findById(enseignant.getIdenseignant()).get();
+     salle=read(salle);
+     salle.getListEnseignant().remove(enseignant);
+     enseignant.setSalle(null);
+     salleRepository.save(salle);
+     enseignantRepository.save(enseignant);
+    }
+
+
     @Override
     public Salle create(Salle salle) throws Exception {
         salleRepository.save(salle);
@@ -58,6 +93,12 @@ public class SalleServiceImpl implements InterfSalleService{
     @Override
     public Page<Salle> allp(Pageable pageable) throws Exception {
         return salleRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Infos> readInfos(Salle salle) throws Exception {
+        salle=read(salle);
+        return salle.getListInfos();
     }
 
 

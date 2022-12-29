@@ -28,7 +28,7 @@ public class RestInfos {
     @RequestMapping(value = "/idcl={idcl}/idcrs={idcrs}", method = RequestMethod.GET)
     public ResponseEntity<Infos> getInfos(@PathVariable(value = "idcl") int idcl,@PathVariable(value = "idcrs") int idcrs) throws Exception{
         System.out.println("recherche de l'infos d'idclasse " + idcl+" et d'idcours"+idcrs);
-        Infos inf = new Infos(new InfosPK(idcl,idcrs),0,new Classe(1,"",0,"",0,new ArrayList<>()),new Cours(1,"","",new ArrayList<>()),null,null);
+        Infos inf = new Infos(new InfosPK(idcl,idcrs),0,new Classe(idcl,"",0,"",0,new ArrayList<>()),new Cours(idcrs,"","",new ArrayList<>()),null,null);
         Infos infos = infosServiceImpl.read(inf);
         return new ResponseEntity<>(infos, HttpStatus.OK);
     }
@@ -73,7 +73,7 @@ public class RestInfos {
     @RequestMapping(value = "/idcl={idcl}/idcrs={idcrs}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteInfos(@PathVariable(value = "idcl") int idcl,@PathVariable(value = "idcrs") int idcrs) throws Exception{
         System.out.println("effacement de l'infos d'idclasse = " + idcl+" et d'idcours = "+idcrs);
-        Infos inf = new Infos(new InfosPK(idcl,idcrs),0,new Classe(1,"",0,"",0,new ArrayList<>()),new Cours(1,"","",new ArrayList<>()),null,null);
+        Infos inf = new Infos(new InfosPK(idcl,idcrs),0,new Classe(idcl,"",0,"",0,new ArrayList<>()),new Cours(idcrs,"","",new ArrayList<>()),null,null);
         infosServiceImpl.delete(inf);
         return new ResponseEntity<>(HttpStatus.OK);
     }

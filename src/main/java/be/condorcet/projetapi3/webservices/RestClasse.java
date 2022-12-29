@@ -2,6 +2,8 @@ package be.condorcet.projetapi3.webservices;
 
 import be.condorcet.projetapi3.entities.Classe;
 import be.condorcet.projetapi3.entities.Cours;
+import be.condorcet.projetapi3.entities.Infos;
+import be.condorcet.projetapi3.entities.Salle;
 import be.condorcet.projetapi3.services.InterfClasseService;
 import be.condorcet.projetapi3.services.InterfService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,7 +103,12 @@ public class RestClasse {
         return new ResponseEntity<>(classeServiceImpl.allp(pageable), HttpStatus.OK);
     }
 
-
+    @RequestMapping(value = "/infos/idclasse={idclasse}",method = RequestMethod.GET)
+    public ResponseEntity<List<Infos>> InfosClasse(@PathVariable(value = "idclasse") int idclasse) throws Exception{
+        System.out.println("infos de la classe d'id "+idclasse);
+        Classe cl = new Classe(idclasse,"",1,"",1,new ArrayList<>());
+        return new ResponseEntity<>(classeServiceImpl.readInfos(cl),HttpStatus.OK);
+    }
 
 }
 

@@ -1,7 +1,10 @@
 package be.condorcet.projetapi3.services;
 
 import be.condorcet.projetapi3.entities.Cours;
+import be.condorcet.projetapi3.entities.Infos;
 import be.condorcet.projetapi3.repositories.CoursRepository;
+import be.condorcet.projetapi3.repositories.InfosRepository;
+import ch.qos.logback.core.CoreConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,15 +19,23 @@ import java.util.Optional;
 public class CoursServiceImpl implements InterfCoursService{
     @Autowired
     private CoursRepository coursRepository;
+    @Autowired
+    private InfosRepository infosRepository;
 
     @Override
     public List<Cours> read(String intitule) {
-        return coursRepository.findCoursByIntituleLike(intitule);
+        return coursRepository.findCoursByIntituleLike(intitule+"%");
     }
 
     @Override
     public Cours rechCours(String code) {
         return coursRepository.findCoursByCodeLike(code);
+    }
+
+    @Override
+    public List<Infos> readInfos(Cours cours) throws Exception {
+        cours=read(cours);
+        return cours.getListInfos();
     }
 
     @Override

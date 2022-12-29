@@ -1,6 +1,8 @@
 package be.condorcet.projetapi3.webservices;
 
+import be.condorcet.projetapi3.entities.Classe;
 import be.condorcet.projetapi3.entities.Cours;
+import be.condorcet.projetapi3.entities.Infos;
 import be.condorcet.projetapi3.services.InterfCoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -96,6 +98,14 @@ public class RestCours {
     public ResponseEntity<Page<Cours>> listCours(Pageable pageable) throws Exception{
         System.out.println("recherche de tous les cours");
         return new ResponseEntity<>(coursServiceImpl.allp(pageable), HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/infos/idcours={idcours}",method = RequestMethod.GET)
+    public ResponseEntity<List<Infos>> InfosCours(@PathVariable(value = "idcours") int idcours) throws Exception{
+        System.out.println("infos de cours d'id "+idcours);
+        Cours crs = new Cours(idcours,"","",new ArrayList<>());
+        return new ResponseEntity<>(coursServiceImpl.readInfos(crs),HttpStatus.OK);
     }
 
 }
