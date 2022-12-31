@@ -1,9 +1,9 @@
 package be.condorcet.projetapi3.services;
 
-import be.condorcet.projetapi3.entities.Classe;
-import be.condorcet.projetapi3.entities.Infos;
-import be.condorcet.projetapi3.entities.InfosPK;
+import be.condorcet.projetapi3.entities.*;
+import be.condorcet.projetapi3.repositories.EnseignantRepository;
 import be.condorcet.projetapi3.repositories.InfosRepository;
+import be.condorcet.projetapi3.repositories.SalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +18,10 @@ import java.util.Optional;
 public class InfosServiceImpl implements InterfInfosService{
     @Autowired
     private InfosRepository infosRepository;
+    @Autowired
+    private EnseignantRepository enseignantRepository;
+    @Autowired
+    private SalleRepository salleRepository;
     @Override
     public Infos create(Infos infos) throws Exception {
         infosRepository.save(infos);
@@ -56,5 +60,23 @@ public class InfosServiceImpl implements InterfInfosService{
     @Override
     public List<Infos> read(Integer nbreheures) {
         return infosRepository.findInfosByNbreheuresLike(nbreheures);
+    }
+
+    @Override
+    public Infos modifEnseignant(Infos infos, Enseignant enseignant) throws Exception {
+        infos=read(infos);
+        enseignant=enseignantRepository.findById(enseignant.getIdenseignant()).get();
+        infos.setEnseignant(enseignant);
+        infosRepository.save(infos);
+        return infos;
+    }
+
+    @Override
+    public Infos modifSalle(Infos infos, Salle salle) throws Exception {
+        infos=read(infos);
+        salle=salleRepository.findById(salle.getIdsalle()).get();
+        infos.setSalle(salle);
+        infosRepository.save(infos);
+        return infos;
     }
 }

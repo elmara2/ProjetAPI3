@@ -1,10 +1,8 @@
 package be.condorcet.projetapi3.webservices;
 
-import be.condorcet.projetapi3.entities.Classe;
-import be.condorcet.projetapi3.entities.Cours;
-import be.condorcet.projetapi3.entities.Infos;
-import be.condorcet.projetapi3.entities.InfosPK;
+import be.condorcet.projetapi3.entities.*;
 import be.condorcet.projetapi3.services.InterfCoursService;
+import be.condorcet.projetapi3.services.InterfEnseignantService;
 import be.condorcet.projetapi3.services.InterfInfosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +44,7 @@ public class RestInfos {
     @RequestMapping(value = "/all"
             ,method = RequestMethod.GET)
     public ResponseEntity<List<Infos>> listInfos() throws Exception{
-        System.out.println
-                ("recherche de tous les infos");
+        System.out.println("recherche de tous les infos");
         return new ResponseEntity<>(infosServiceImpl.all(), HttpStatus.OK);
     }
 
@@ -68,6 +66,35 @@ public class RestInfos {
         Infos infact = infosServiceImpl.update(nouvinf);
         return new ResponseEntity<>(infact, HttpStatus.OK);
     }
+
+
+    @RequestMapping(value = "/idcl={idcl}/idcrs={idcrs}/idens={idens}", method = RequestMethod.PUT)
+    public ResponseEntity<Infos> majEnsInfos(@PathVariable(value = "idcl") int idcl,@PathVariable(value = "idcrs") int idcrs,@PathVariable(value = "idens") int idens) throws Exception{
+        System.out.println("maj de l'enseignant "+idens+" de l'infos d'idclasse = " + idcl+" et d'idcours = "+idcrs);
+        Infos inf = new Infos(new InfosPK(idcl,idcrs),0,new Classe(idcl,"",0,"",0,new ArrayList<>()),new Cours(idcrs,"","",new ArrayList<>()),null,null);
+        Enseignant ens = new Enseignant(idens,"","","","","",2500.23, LocalDate.of(2022,11,11),null,new ArrayList<>());
+        inf = infosServiceImpl.modifEnseignant(inf,ens);
+        return new ResponseEntity<>(inf, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/idcl={idcl}/idcrs={idcrs}/idsal={idsal}", method = RequestMethod.PUT)
+    public ResponseEntity<Infos> majSalInfos(@PathVariable(value = "idcl") int idcl,@PathVariable(value = "idcrs") int idcrs,@PathVariable(value = "idsal") int idsal) throws Exception{
+        System.out.println("maj de la salle "+idsal+" de l'infos d'idclasse = " + idcl+" et d'idcours = "+idcrs);
+        Infos inf = new Infos(new InfosPK(idcl,idcrs),0,new Classe(idcl,"",0,"",0,new ArrayList<>()),new Cours(idcrs,"","",new ArrayList<>()),null,null);
+        Salle sal = new Salle(idsal,"",1,new ArrayList<>(),new ArrayList<>());
+        inf = infosServiceImpl.modifSalle(inf,sal);
+        return new ResponseEntity<>(inf, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/idcl={idcl}/idcrs={idcrs}/n={n}", method = RequestMethod.PUT)
+    public ResponseEntity<Infos> majNbreHeureInfos(@PathVariable(value = "idcl") int idcl,@PathVariable(value = "idcrs") int idcrs,@PathVariable(value = "n") int n) throws Exception{
+        System.out.println("maj du nbre d(heure "+n+" de l'infos d'idclasse = " + idcl+" et d'idcours = "+idcrs);
+        Infos inf = new Infos(new InfosPK(idcl,idcrs),n,new Classe(idcl,"",0,"",0,new ArrayList<>()),new Cours(idcrs,"","",new ArrayList<>()),null,null);
+        inf.setNbreheures(n);
+        return new ResponseEntity<>(inf, HttpStatus.OK);
+    }
+
+
 
     //-------------------Effacer une infos d'un id donné(idclasse et idcours)--------------------------------------------------------
     @RequestMapping(value = "/idcl={idcl}/idcrs={idcrs}", method = RequestMethod.DELETE)
