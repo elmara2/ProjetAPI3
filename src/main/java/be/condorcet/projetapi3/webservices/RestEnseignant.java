@@ -120,6 +120,18 @@ public class RestEnseignant {
         return new ResponseEntity<>(enseignantServiceImpl.allp(pageable), HttpStatus.OK);
     }
 
+
+    @RequestMapping(value = "/nom={nom}/sal", method = RequestMethod.GET)
+    public ResponseEntity<List<Salle>> listSalleDeEnseignantWithName(@PathVariable(value = "nom") String nom) throws Exception{
+        System.out.println("recherche des salles de l'enseignant donc le nom commence par " + nom);
+        List<Enseignant> enseignants;
+        enseignants = enseignantServiceImpl.read(nom);
+        List<Salle> lsal = enseignantServiceImpl.rechSalleDeEnseignantWithName(enseignants);
+        return new ResponseEntity<>(lsal,HttpStatus.OK);
+    }
+
+
+
     @RequestMapping(value = "/infos/idens={idens}",method = RequestMethod.GET)
     public ResponseEntity<List<Infos>> InfosEnseignant(@PathVariable(value = "idens") int idens) throws Exception{
         System.out.println("infos de l'enseignant d'id "+idens);

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -82,5 +83,19 @@ public class EnseignantServiceImpl implements InterfEnseignantService{
     public List<Infos> readInfos(Enseignant enseignant) throws Exception {
         enseignant=read(enseignant);
         return enseignant.getListInfos();
+    }
+
+    @Override
+    public List<Salle> rechSalleDeEnseignantWithName(List<Enseignant> listenseignant) throws Exception {
+        Salle sal;
+        List<Salle> lsal=new ArrayList<Salle>();
+        for (Enseignant ens : listenseignant) {
+            sal=rechSalleDeEnseignant(ens);
+            if(!lsal.contains(sal)){
+                lsal.add(sal);
+            }
+
+        }
+        return lsal;
     }
 }

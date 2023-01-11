@@ -1,11 +1,9 @@
 package be.condorcet.projetapi3.services;
 
-import be.condorcet.projetapi3.entities.Cours;
 import be.condorcet.projetapi3.entities.Enseignant;
 import be.condorcet.projetapi3.entities.Infos;
 import be.condorcet.projetapi3.entities.Salle;
 import be.condorcet.projetapi3.repositories.EnseignantRepository;
-import be.condorcet.projetapi3.repositories.InfosRepository;
 import be.condorcet.projetapi3.repositories.SalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,8 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
@@ -27,8 +25,21 @@ public class SalleServiceImpl implements InterfSalleService{
 
     @Override
     public List<Salle> read(int capacite) {
-        return salleRepository.findSallesByCapacite(capacite);
+        return salleRepository.findAllByCapaciteAfter(capacite);
     }
+
+    @Override
+    public List<Salle> readByCapacitySupp(int capacite) throws Exception {
+        List<Salle> listSalle=new ArrayList<Salle>();
+        List<Salle> lsal = all();
+        for (Salle sal : lsal) {
+            if (sal.getCapacite()>=capacite){
+                listSalle.add(sal);
+            }
+        }
+        return listSalle;
+    }
+
     @Override
     public Salle rechSalle(String sigle) {
         return salleRepository.findSalleBySigleLike(sigle);

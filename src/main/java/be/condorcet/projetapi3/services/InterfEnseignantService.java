@@ -12,4 +12,5 @@ public interface InterfEnseignantService extends InterfService<Enseignant>{
     public Salle rechSalleDeEnseignant(Enseignant enseignant) throws Exception;
     public Enseignant modifSalleDeEnseignant(Enseignant enseignant,Salle salle) throws Exception;
     public List<Infos> readInfos(Enseignant enseignant) throws Exception;
+    public  List<Salle> rechSalleDeEnseignantWithName(List<Enseignant> lenseignant) throws Exception;
 }

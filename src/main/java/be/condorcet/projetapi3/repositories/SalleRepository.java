@@ -11,6 +11,5 @@ import java.util.List;
 public interface SalleRepository extends JpaRepository<Salle,Integer> {
     public List<Salle> findSallesByCapacite(Integer capacite);
     public Salle findSalleBySigleLike(String sigle);
-
-    public Enseignant findAllByListEnseignantContains(Enseignant enseignant);
+    public List<Salle> findAllByCapaciteAfter(Integer capacite);
 }
